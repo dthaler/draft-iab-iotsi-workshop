@@ -186,16 +186,16 @@ interested to learn about the following aspects:
 
 The first roadblock to semantic interoperability is the lack of a
 common vocabulary to start the discussion.
-{{RFC3444}} does a start by separating conceptual models for designers
-or Information Models (IMs) and concrete detailed definitions for
-implementers or Data Models (DMs).  There are concepts that are
+{{RFC3444}} provides a starting point by separating conceptual models for designers,
+or "information models", from concrete detailed definitions for implementers, or
+"data models". There are concepts that are
 undefined in that RFC and elsewhere, such as the interaction with the
-resources of an endpoint or Interaction Model.  Therefore the three
-"main" common models that could be identified were:
+resources of an endpoint, or "interaction model".  Therefore the three
+"main" common models that were identified were:
 
 {: hangIndent='3'}
-Information Model (IM)
-: It defines an environment at the highest level of abstraction, they
+Information Model
+: An information model defines an environment at the highest level of abstraction, they
   express the desired functionality.
   They can be defined informally (e.g. in plain English) or more
   formally (e.g.  UML, Entity-Relationship Diagrams, etc.).
@@ -203,8 +203,8 @@ Information Model (IM)
 {: vspace='0'}
 
 {: hangIndent='3'}
-Data Model (DM)
-: It defines concrete data representations at a lower level of
+Data Model
+: A data model defines concrete data representations at a lower level of
   abstraction, including implementation and protocol-specific details.
   Some examples are: SNMP Management Information
   Base (MIBs), W3C Thing Description (TD) Things, YANG models, LWM2M
@@ -212,8 +212,8 @@ Data Model (DM)
 {: vspace='0'}
 
 {: hangIndent='3'}
-Interaction Model (IN)
-: It defines how data is accessed and retrieved from the endpoints,
+Interaction Model
+: An interaction model defines how data is accessed and retrieved from the endpoints,
   being therefore tied to the specific
   communication pattern that the system has (e.g.  REST methods,
   Publish/Subscribe operations or RPC-calls).
@@ -340,7 +340,7 @@ Translation can happen in two flavours, namely:
 
 a)  Translating data models: performs one translation between the data models
 once during design time, like translating a YANG model to a RAML/JSON model. A
-single IM can be mapped to a number of different DMs.
+single information model can be mapped to a number of different data models.
 b)  Translating data between data models implies doing the translation at
 runtime.
 
@@ -351,7 +351,7 @@ and it can be done depending n the actual serialization.
 
 Yet another distinction will appear depending on the requirements
 from the application protocols, RPC-style ones might require a
-slightly different DM than REST ones for similar operations, for
+slightly different data model than REST ones for similar operations, for
 example SNMP-traps could be similar to CoAP-Observations but not
 quite the same.  It is easier to translate between systems that
 follow the same architecture/design pattern than across
