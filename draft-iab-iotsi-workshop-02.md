@@ -102,6 +102,11 @@ informative:
     author:
     - org: Nordic Semiconductor
     date: 2016
+  AllJoynExplorer:
+    title: AllJoyn Explorer
+    author:
+    - org: Microsoft
+    date: 2016
 
 --- abstract
 
@@ -197,8 +202,8 @@ resources of an endpoint, or "interaction model".  Therefore the three
 Information Model
 : An information model defines an environment at the highest level of abstraction, they
   express the desired functionality.
-  They can be defined informally (e.g. in plain English) or more
-  formally (e.g.  UML, Entity-Relationship Diagrams, etc.).
+  They can be defined informally (e.g., in plain English) or more
+  formally (e.g., UML, Entity-Relationship Diagrams, etc.).
   Implementation details are hidden.
 {: vspace='0'}
 
@@ -207,7 +212,7 @@ Data Model
 : A data model defines concrete data representations at a lower level of
   abstraction, including implementation and protocol-specific details.
   Some examples are: SNMP Management Information
-  Base (MIBs), W3C Thing Description (TD) Things, YANG models, LWM2M
+  Base (MIB) modules, W3C Thing Description (TD) Things, YANG models, LWM2M
   Schemas, OCF Schemas and so on.
 {: vspace='0'}
 
@@ -215,47 +220,49 @@ Data Model
 Interaction Model
 : An interaction model defines how data is accessed and retrieved from the endpoints,
   being therefore tied to the specific
-  communication pattern that the system has (e.g.  REST methods,
-  Publish/Subscribe operations or RPC-calls).
+  communication pattern that the system has (e.g., REST methods,
+  Publish/Subscribe operations, or RPC calls).
 {: vspace='0'}
 
 Another identified terminology issue is the semantic meaning overload
-that some terms have.  Meaning will vary depending on the context the
+that some terms have.  The meaning can vary depending on the context in which the
 term is used.  Some examples of such terms are: semantics, models,
 encoding, serialization format, media types or encoding types.  Due
-to time constraints no concrete terminology was agreed upon, however
+to time constraints, no concrete terminology was agreed upon, but
 work will continue within each organization to create various
-terminology documents, see {{IOTSIGIT}}.
+terminology documents.  The participants agreed to set up a github repository
+{{IOTSIGIT}} for sharing information.
 
 # Architecture {#section-3}
 
-Architectures follow different design patterns, some are REST-
-oriented with clear methods to find and manipulate resources on
-endpoints with almost no state kept between them.  Others are more
+Various architectures follow different design patterns. Some are REST-
+oriented with a limited set of standard methods to find and manipulate resources on
+endpoints.  Others are RPC-like, with a rich set of methods that may vary by 
+resource type. Still others are more
 Publish/Subscribe-oriented that focus on the flow of information
-based on the topics of the information that is being shared.  Others
-are RPC-like requiring to know beforehand the set of parameters that
-are accessed, requiring to generate code both on the client and
-server side, they are tightly coupled and service-oriented.
+based on the topics of the information that is being shared.  
+
+TODO: The 3 items below need to be rewritten, perhaps as normal paragraphs,
+as they're hard to follow and it's unclear what the purpose of the "list" is.
 
 {: hangIndent='3'}
 Thing-hub-cloud
-: things talk to a hub, which talks back to them and
+: Things talk to some type of hub or gateway, which talks back to them and
   to the cloud.  There is a spectrum of emphasis on the hub vs. the
-  cloud.  For some the hub is simply an IP router that connects different link
+  cloud.  For some, the hub is simply an IP router that connects different link
   layer technologies, but for others it
   is a critical place for maintaining local control.
 {: vspace='0'}
 
 {: hangIndent='3'}
 Meta Thing
-: some things are actually virtual, like an alarm composed
-  of clock, lights, and thermostat.
+: Some things are actually a composite of other things, like an alarm composed
+  of a clock, lights, and thermostat.
 {: vspace='0'}
 
 {: hangIndent='3'}
 Nearby things
-: some things may be geospatially related even if they
+: Some things may be geospatially related even if they
   are not on the same network or within the same administrative
   domain.
 {: vspace='0'}
@@ -263,29 +270,27 @@ Nearby things
 Current data models and definitions for "things" often focus on
 defining actual physical devices and representing their state.  That
 focus should perhaps be shifted into a more holistic or user-oriented
-perspective, defining abstract concepts as well.  On the other a lot
-of focus is placed on human interaction with physical devices while
-IoT will be more oriented to interaction between "things" instead.
+perspective, defining abstract concepts as well.  On the other hand, a lot
+of focus is placed on human interaction with physical devices, while
+IoT may often be more focussed on interaction between "things" instead.
 
-Those things should be designed to be multiple-purpose, keeping in
+Those things should be designed to be multi-purpose, keeping in
 mind that solutions should be open-ended to facilitate new usages and
-new future domains of operation. This pattern has already happened,
-devices that were intended for one purpose end up being used for a
-different one given the right context ((e.g. smart phone led light
-turned out to be a heartrate monitor).  IoT domain is currently
-missing insights into what user actually expect.
+new future domains of operation. This pattern has already happened, where
+devices that were intended for one purpose ended up being used for a
+different one given the right context (e.g., a smart phone LED light
+was used as a heartrate monitor).
 
 # What Problems to Solve {#section-4}
 
-The position papers submitted by various organizations, industry groups
-and individuals made clear that there is not a single aspect to be solved but
-rather a range. At least the following goals have been described:
+The participants agreed that there is not simply a single problem to be solved, but
+rather a range. At least the following problems were discussed:
 
 * Formal Languages for Documentation Purposes
 
-Standardization organizations are in the need for a more formal
-description of their information and data models in order to simplify
-review, and publication.  For example, the Open Mobile Alliance (OMA)
+To simplify review and publication, standardization organizations are in 
+need of a more formal description of their information and data models.
+For example, the Open Mobile Alliance (OMA)
 used an XML schema {{LWM2M-Schema}} to describe their object
 definitions (i.e., data model) and the actual object definitions are available
 for download as XML instance documents.  These XML
@@ -295,11 +300,15 @@ XML files of standardized objects are available for download at
 {{OMNA}}.  Furthermore, a tool is offered to define new objects and
 resources.  The online editor tool can be found at {{OMA-Editor}}.
 
+TODO: It might appear unfair to just call out a single organization above, which
+implies that mechanism is somehow better than the other organizations present
+that have other formal languages, especially when the workshop mentioned
+multiple.
+
 * Formal Languages for Code Generation
 
-
-Formal data and information modelling languages for use by developers
-to enable code generation.  For example, the Allseen Visual Studio
+Code generation tools that use formal data and information modelling languages
+are needed by developers. For example, the Allseen Visual Studio
 Plugin {{Allseen-Plugin}} offers a wizard to generate code based on
 the formal description of the data model.  Another example of a data
 modelling language that can be used for code generation is YANG.  A
@@ -307,16 +316,23 @@ popular tool to help with code generation of YANG modules is pyang {{PYANG}}.
 
 * Debugging Support
 
-Ability to allow debugging tools to implement generic object browsers
-by utilizing the standardized information and data model.  Example:
+Debugging tools are needed that implement generic object browsers, which
+use standard data models and/or retrieve formal language descriptions
+from the devices themselves. As one example, the
 NRF Bluetooth Smart sniffer from Nordic Semiconductor {{nRF-Sniffer}} can be
 used to display services and characteristics defined by the Bluetooth SIG.
+As another example, AllJoyn Explorer {{AllJoynExplorer}} can be used to browse
+and interact with any resource exposed by an AllJoyn device, including both 
+standard and vendor-defined data models, by retrieving the formal descriptions
+from the device at runtime.
 
 * Translation
 
-The ability for gateways and other similar devices to dynamically
+Gateways and other similar devices need to dynamically
 translate (or map) one data model to another one.  An example of this
 idea can be found in {{UDI}}.
+
+TODO: Probably need to list other examples discussed in the workshop as well.
 
 * Runtime Discovery
 
@@ -325,58 +341,63 @@ data exchange, to discover meta-data about the data and, potentially,
 even a self-describing interaction model.  An example of such an
 approach has been shown with HATEOAS {{HATEOAS}}.
 
+TODO: Probably need to list other examples discussed in the workshop as well.
+For example, AllJoyn introspection.
+
 # Translation {#section-5}
 
 In an ideal world where organizations and companies cooperate and agree on a
-single standard there is no need for gateways that translate from one data model
-to the other one. However, this is far from reality today since there are lots
-of proprietary data models in addition to the already standardized ones. There
-are analogies with gateways back in the eighties when they were used to
-translate between network layer protocols.  Eventually IP took over providing
+single data model standard, there is no need for gateways that translate from one data model
+to the other one. However, this is far from reality today, and there are many
+proprietary data models in addition to the already standardized ones. There
+are analogies with gateways back in the 1980s that were used to
+translate between network layer protocols.  Eventually IP took over, providing
 the necessary end-to-end interoperability at the network layer. Unfortunately,
-the introduction of translation gateways that lead to the loss of expressiveness due to the translation between models seems unavoidable.
+the introduction of translation gateways that lead to the loss of expressiveness 
+due to the translation between data models seems unavoidable.
 
 Translation can happen in two flavours, namely:
 
-a)  Translating data models: performs one translation between the data models
-once during design time, like translating a YANG model to a RAML/JSON model. A
-single information model can be mapped to a number of different data models.
-b)  Translating data between data models implies doing the translation at
+a)  Translating formal descriptions between data models: a translation between data model
+descriptions, such as translating a YANG model to a RAML/JSON model,
+can be performed once such as during design time.
+A single information model can be mapped to a number of different data models.
+b)  Translating data between data models: this flavour implies doing translation at
 runtime.
 
-In a sense these distinctions affect as to when the translation is
+In one sense, these distinctions affect when the relevant translation is
 performed.  It can be done at "design time" when the information
-model is done, it can be done at runtime for a concrete data model
-and it can be done depending n the actual serialization.
+model is done, or it can be done at runtime for a concrete data model
+and it can be done depending on the actual serialization.
 
 Yet another distinction will appear depending on the requirements
-from the application protocols, RPC-style ones might require a
-slightly different data model than REST ones for similar operations, for
-example SNMP-traps could be similar to CoAP-Observations but not
+from the application protocols. RPC-style ones might require a
+slightly different data model than RESTful ones for similar operations. For
+example, SNMP-traps could be similar to CoAP-Observations but not
 quite the same.  It is easier to translate between systems that
 follow the same architecture/design pattern than across
-architectures, full translation might not even be possible (e.g.
+architectures, and sometimes a full translation might not even be possible (e.g.,
 stateless vs stateful systems).
 
 # Dealing with change {#section-6}
 
 A large part of the workshop was dedicated to the evolution of
 devices and server side applications.  Multiple of the participating
-groups have defined data formats for data representation, however
-interactions between devices and services and how their relationship
-evolves over time is more related to the interaction model.
+groups have defined data formats for data representation.
+Interactions between devices and services and how their relationship
+evolves over time is more related to their respective interaction models.
 
-There are various approaches to it.  In the most primitive case, a
+There are various approaches to dealing with change.  In the most primitive case, a
 developer will use a description of an API and implement whichever
 are the protocol steps.  In some cases the information model itself
-can be used to generate some of the code stubs.  Changes of an API
-imply changes on the clients to upgrade to the new version, which
+can be used to generate some of the code stubs.  Subsequent changes to an API
+require changes on the clients to upgrade to the new version, which
 requires some development of new code to satisfy the needs of the new
 API.
 
-These interactions could be made machine-understandable on the first place,
+These interactions could be made machine-understandable in the first place,
 enabling for changes to happen at runtime.
-In that scenario, a machine client can discover the possible interactions with a
+In that scenario, a machine client could discover the possible interactions with a
 service, adapting to changes as they occur without specific code
 being developed to adapt to them.
 
@@ -384,24 +405,22 @@ The challenge seems to be to define the human-readable parts as
 machine-readable.  Machine-readable languages require a shared vocabulary to
 give meaning to the tags.
 
-These type of interactions are based on the the REST architectural
+These types of interactions are often based on the REST architectural
 style. Its principle is that a device or endpoint only needs a
 single entry point with a host providing descriptions of the API
-inband by means of web links and forms.
+in-band by means of web links and forms.
 
-By defining IoT specific relation types, it is possible to drive
+By defining IoT-specific relation types, it is possible to drive
 interactions through links instead of hardcoding URIs into the
 client, thus making the system flexible enough for later changes.
 The definition of the basic hypermedia formats for IoT is still work
-in progress, however some of the existing mechanism can be reused,
-such as resource discovery, forms or links.
+in progress, however some of the existing mechanisms can be reused,
+such as resource discovery, forms, or links.
 
 # Acknowledgements {#section-7}
 
 We would like to thank all paper authors and participants for their
-contributions.  Due to the large number of position paper submissions
-we were unfortunately unable to invite every author; we would like to
-apologize to those that could not attend the workshop.
+contributions.
 
 # Appendix A: Program Committee {#section-8}
 
