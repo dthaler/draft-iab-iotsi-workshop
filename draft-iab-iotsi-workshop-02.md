@@ -107,6 +107,12 @@ informative:
     author:
     - org: Microsoft
     date: 2016
+  OpenDOF:
+    target: https://opendof.org
+    title: The OpenDOF Project
+    author:
+    - org: OpenDOF
+    date: 2015
 
 --- abstract
 
@@ -303,7 +309,8 @@ resources.  The online editor tool can be found at {{OMA-Editor}}.
 TODO: It might appear unfair to just call out a single organization above, which
 implies that mechanism is somehow better than the other organizations present
 that have other formal languages, especially when the workshop mentioned
-multiple.
+multiple.  W3C uses RDF, OCF uses JSON+RAML, AllSeen uses XML with a specific XSD, etc.
+Should either use multiple examples, or no examples.
 
 * Formal Languages for Code Generation
 
@@ -313,6 +320,9 @@ Plugin {{Allseen-Plugin}} offers a wizard to generate code based on
 the formal description of the data model.  Another example of a data
 modelling language that can be used for code generation is YANG.  A
 popular tool to help with code generation of YANG modules is pyang {{PYANG}}.
+An example of a tool that can do code generation for different ecosystems is
+OpenDOF {{OpenDOF}}. Use cases discussed for code generation included easing
+development of server-side device functionality, clients, and compliance tests.
 
 * Debugging Support
 
@@ -356,6 +366,13 @@ the necessary end-to-end interoperability at the network layer. Unfortunately,
 the introduction of translation gateways that lead to the loss of expressiveness 
 due to the translation between data models seems unavoidable.
 
+TODO: add discussion of the "red star" diagram
+
+TODO: add key point discussed that translation between two standard data models requires specific code,
+it cannot be algorithmically derived based on the two formal descriptions.  It can only be
+algorithmically done when the actual data model on one side is actually algorithmically derived
+from the one on the other side.  This is called a "derived model".
+
 Translation can happen in two flavours, namely:
 
 a)  Translating formal descriptions between data models: a translation between data model
@@ -364,6 +381,9 @@ can be performed once such as during design time.
 A single information model can be mapped to a number of different data models.
 b)  Translating data between data models: this flavour implies doing translation at
 runtime.
+
+TODO: more info was summarized on the slides and in the notes about three types of
+runtime interactions discussed in the papers (and at the workshop): 
 
 In one sense, these distinctions affect when the relevant translation is
 performed.  It can be done at "design time" when the information
@@ -387,8 +407,8 @@ groups have defined data formats for data representation.
 Interactions between devices and services and how their relationship
 evolves over time is more related to their respective interaction models.
 
-There are various approaches to dealing with change.  In the most primitive case, a
-developer will use a description of an API and implement whichever
+The workshop discussed various approaches to dealing with change.  In the most primitive case, a
+developer might use a description of an API and implement whichever
 are the protocol steps.  In some cases the information model itself
 can be used to generate some of the code stubs.  Subsequent changes to an API
 require changes on the clients to upgrade to the new version, which
@@ -417,7 +437,30 @@ The definition of the basic hypermedia formats for IoT is still work
 in progress, however some of the existing mechanisms can be reused,
 such as resource discovery, forms, or links.
 
-# Collaboration {#section-7}
+# Security Considerations {#section-7}
+
+There were two types of security considerations discussed: use of formal data 
+models for security configuration, and security of data and data models in general.
+
+It was observed that the security assumptions and configuration, or "security model", varies by ecosystem today,
+making the job of a translator difficult.  For example, the types of security
+principals (e.g., user vs. device vs. application), the use of ACLs vs. capabilities,
+and what types of policies can be expressed, all vary by ecosystem.  As a result,
+the security model architecture generally dictates where translation can be done.
+
+One approach discussed was whether two endpoints might be able to use some overlay
+security model, across a translator between two ecosystems, which only works if
+the two endpoints agree on a common data model for their communication.  Another approach
+discussed was simply having a translator act as a trusted intermediary, which allows
+the translator to be able to translate between different data models.
+
+One suggestion discussed was potentially adding metadata into either the
+formal data model language, or accompanying the data values over the wire, tagging
+the data with privacy levels.  However, sometimes even the privacy level of information
+might itself be sensitive.  Still, it was observed that being able to dynamically
+learn security requirements might help provide better UIs and translators.
+
+# Collaboration {#section-8}
 
 The participants discussed how best to share information among their various organizations.
 One discussion was around having joint meetings. One current challenge reported was that
@@ -432,14 +475,18 @@ same information model.  To facilitate this exchange, this participants discusse
 a common repository might be used by multiple organizations.  The OCF's OneIoTa repository
 was discussed as one possibility but it was reported that its Terms of Use at the time
 of the workship prevented this.  The OCF agreed to take this back and look at updating
-the Terms of Use to allow other organizations to use it too.  In the meantime, the
-participants agreed to add links to their respective repositories from a common page
-in the IOTSI repository {{IOTSIGIT}}.
+the Terms of Use to allow other organizations to use it too, as the restriction was not
+the intent.  Schema.org was discussed as another possibility.  In the meantime, the
+participants agreed to add links to their respective repositories from a common page in
+the IOTSI repository {{IOTSIGIT}}.
 
-# Acknowledgements {#section-8}
+It was also agreed that the iotsi@iab.org mailing list would remain open and available
+for sharing information between all relevant organizations.
+
+# Acknowledgements {#section-9}
 
 We would like to thank all paper authors and participants for their
-contributions.
+contributions, and Ericsson for hosting the workshop.
 
 # Appendix A: Program Committee {#section-8}
 
