@@ -134,36 +134,53 @@ Task Force (IETF).  This long-term planning function of the IAB is
 complementary to the ongoing engineering efforts performed by working
 groups of the IETF.
 
-Increasing interoperability in the area of Internet of Things (IoT)
-has been a top priority for many standards organizations and
-particularly the lower layers of the Internet protocol stack have
-received a lot of attention.  Also at the application layer, such as
-with CoAP and HTTP, there is a trend in reusing RESTful design
-patterns.  However, there are still many companies and organizations defining specifications that describe the same type of data. This leads to interoperability problems.
+With the expansion of the Internet of Things (IoT), interoperability 
+becomes more and more important. Standards-developing organizations 
+have done a tremendous amount of work to standardize protocols to 
+simplify implementation and to lower the cost of IoT products. As a 
+result, new protocols were developed, existing protocols were combined 
+in new ways, and lightweight profiles were defined.
+
+At the application layer, interoperability is not yet mature; the 
+work on data formats (in the form of data models and information 
+models) has not seen the same level of consistency throughout various 
+standardization groups. 
+
+One common problem is the lack of an encoding-independent standardization 
+of the information, the so-called information model. Another problem is 
+the strong relationship with the underlying communication architecture, 
+such as an RPC or a RESTful design. Furthermore, different groups develop 
+similar concepts that only differ slightly, leading to interoperability 
+problems. Finally, some groups favor different encodings for use with 
+various application layer protocols.
 
 Thus, the IAB decided to organize a workshop to reach out to relevant
 stakeholders to explore the state-of-the-art and to identify
 communality and gaps {{IOTSIAG}}, {{IOTSIWS}}. In particular, the IAB was
 interested to learn about the following aspects:
 
-* The different perceived state of the art on data and information
-  models.
+* What is the state of the art in data and information models? What should 
+  an information model look like?
 
-* The lack of an encoding-independent standardization of the
-  information, the so-called information model.
+* What is the role of formal languages, such as schema languages, in 
+  describing information and data models?
 
-* The influence of the communication pattern,
-  such as remote procedure calls (RPC), publish/subscribe or RESTful
-  designs, on the deisgn of data and information models.
+* What is the role of metadata, which is attached to data to make it self-describing?
 
-* Identifying which similar concepts groups have develop in
-  parallel, especially those that would require only slight
-  modifications to solve interoperability.
+* How can we achieve interoperability when different organizations, companies 
+  and individuals develop extensions?
 
-* Identifying how existing data models can be mapped against each
-  other to offer inter working.
+* What is the experience with interworking various data models developed
+  from different groups, or with data models that evolved over time?
 
-* Identifying common use cases for cooperation and harmonization.
+* What functionality should online repositories for sharing schemas have?
+
+* How can existing data models be mapped against each other to offer interworking?
+
+* Is there room for harmonization, or are the use cases of different groups 
+  and organizations so unique that there is no possibility for cooperation?
+
+* How can organizations better work together to increase awareness and information sharing?
 
 # Terminology {#section-2}
 
