@@ -54,7 +54,7 @@ informative:
     - org: IAB
     date: 2016
   IOTSIGIT:
-    target: https://github.com/iotsi
+    target: https://github.com/iotsi/iotsi
     title: Github Collaborative Repository
     author:
     - org: IOTSI
@@ -417,7 +417,26 @@ The definition of the basic hypermedia formats for IoT is still work
 in progress, however some of the existing mechanisms can be reused,
 such as resource discovery, forms, or links.
 
-# Acknowledgements {#section-7}
+# Collaboration {#section-7}
+
+The participants discussed how best to share information among their various organizations.
+One discussion was around having joint meetings. One current challenge reported was that
+organizations were not aware of when and where each others' meetings were scheduled,
+and sharing such information could help organizations better colocate meetings.
+To facilitate this exchange, the participants agreed to add links to their respective
+meeting schedules from a common page in the IOTSI repository {{IOTSIGIT}}.
+
+Another challenge reported was that organizations did not know how to find each others'
+published data models, and sharing such information could better facilitate reuse of the
+same information model.  To facilitate this exchange, this participants discussed whether
+a common repository might be used by multiple organizations.  The OCF's OneIoTa repository
+was discussed as one possibility but it was reported that its Terms of Use at the time
+of the workship prevented this.  The OCF agreed to take this back and look at updating
+the Terms of Use to allow other organizations to use it too.  In the meantime, the
+participants agreed to add links to their respective repositories from a common page
+in the IOTSI repository {{IOTSIGIT}}.
+
+# Acknowledgements {#section-8}
 
 We would like to thank all paper authors and participants for their
 contributions.
